@@ -53,9 +53,17 @@ class ProcessComplaints
      */
     public function compute(): int {
         // HARD CODED index's just to get a solution built out real quick
+        //TODO: dynamically find index of fields just in case column order changes
         $_company = 7;
         $_date = 0;
         $_product = 1;
+        
+        $reportStruct = new class() {
+            public array $co;
+            public array $y;
+            public array $pro;
+            public array $biz;
+        };
         
         $mostMem = memory_get_usage();
         // track mem usage & print every 1,000 recs
@@ -78,6 +86,18 @@ class ProcessComplaints
         foreach(DataStream::genStream($this->pathToCsv) as $k => $row) {
             // skip header row
             if(0 === $k) continue;
+            $company = trim($row[$_company]);
+            $year = trim(substr($row[$_date], 0, 4));
+            // check for commas
+            $product = trim($row[$_product]);
+            $key = $product . "_$year";
+            
+            if(isset($reportStruct->pro[$key])) {
+                $reportStruct->pro[$key]++;
+            }
+            else {
+                $reportStruct->pro[$key] = 1;
+            }
             
             $trackMemLambda();
             $debug = 1;
