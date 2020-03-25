@@ -16,6 +16,15 @@ took 2min 28sec
 used 429kb or less of memory
 
 
+//-- RUN 3 (from command line) - app logic mostly written
+~console output: 
+Total time to run program = -160
+Most memory used = 5,450,688
+~meaning:
+took 2mins40secs
+used 5,540kb or less or memory (e.g. 5.4MB)
+
+
 
 
 

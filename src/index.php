@@ -15,7 +15,8 @@ use dataphp\ProcessComplaints;
 require 'classes/DataStream.php';
 require 'classes/ProcessComplaints.php';
 
-$pathToCsvInput = '../input/s_complaints.csv';
+// the path to the CSV files
+$pathToCsvInput = '../input/complaints.csv';
 $pathToCsvOutput  = '../output/test_report.csv';
 
 $complaintProcessor = new ProcessComplaints($pathToCsvInput, $pathToCsvOutput);

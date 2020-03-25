@@ -1,4 +1,0 @@
-product,year,product_total_complaints,total_company_complaints,company_highest_percent
-"Debt collection",2019,1,3,67
-"Credit reporting, credit repair services, or other personal consumer reports",2019,3,3,67
-"Credit reporting, credit repair services, or other personal consumer reports",2020,1,1,100
