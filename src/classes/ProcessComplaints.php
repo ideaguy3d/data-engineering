@@ -172,8 +172,38 @@ class ProcessComplaints
             // product year
             $py = explode('_', $hash);
             // results
-            $r = [$py[0], $py[1]];
+            $r = [
+                'product' => $py[0], 'year' => $py[1], 'product_total_complaints' => $value,
+            ];
+            $totalCompanyComplaints = count($reportStruct->yearBusinessTotal[(int)$r['year']]);
+            /*
+            //-- DAMMIT !! this won't work, I need to create a data structure like:
+            $mockStruct = [
+                '2020' => [
+                    'company_foo' => [
+                        'product_bar_complaints' => 111,
+                    ]
+                ],
+                '2019' => [
+                    'company_foo' => [
+                        'product_bar_complaints' => 222
+                    ]
+                ]
+            ];
             
+            // my current data structure doesn't map year.company.product.numComplaints
+            $complaintPct = array (
+              2019 => 67,
+              2020 => 100,
+            )
+            */
+            
+            //TODO: FIX THIS, the last field is wrong, it's an easy fix that I'll work on tonight
+            $companyHighestPct = $reportStruct->complaintPct[(int)$r['year']];
+            
+            // just test the rest of the logic
+            $r [] = $totalCompanyComplaints;
+            $r [] = $companyHighestPct;
             $this->report [] = $r;
         }
         
