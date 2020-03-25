@@ -41,9 +41,16 @@ class ProcessComplaints
             public string $biz = 'total_company_complaints';
             public string $pct = 'company_highest_percent';
         };
-        $this->report [] = array_values((array)$this->reportFields);
-        $this->pathToCsv = $pathToCsv;
+        
+        // open a stream to disk, working with streams rather than
+        // in-memory objects (e.g. arrays) massively decreases
+        // the programs' space complexity, in PHP it's easy (:
         $this->streamTo = fopen($pathToCsvOutput, 'w');
+        
+        $headerRow = array_values((array)$this->reportFields);
+        DataStream::writeToDisk($this->streamTo, $headerRow);
+        $this->report [] = $headerRow; // may not need this class prop
+        $this->pathToCsv = $pathToCsv;
     }
     
     public function __destruct() {
@@ -204,7 +211,8 @@ class ProcessComplaints
             // just test the rest of the logic
             $r [] = $totalCompanyComplaints;
             $r [] = $companyHighestPct;
-            $this->report [] = $r;
+            DataStream::writeToDisk($this->streamTo, $r);
+            //$this->report [] = $r;
         }
         
         return $mostMem;
