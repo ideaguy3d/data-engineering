@@ -49,21 +49,21 @@ class ProcessComplaints
      * - number of companies receiving a complaint
      * - and the highest percentage of complaints directed at a single company.
      *
-     * @return int
+     * @return int - return the most mem used during the program
      */
     public function compute(): int {
+        // get initial mem
+        $mostMem = memory_get_usage();
+        
         // HARD CODED index's just to get a solution built out real quick
         //TODO: dynamically find index of fields just in case column order changes
         $_company = 7;
         $_date = 0;
         $_product = 1;
         
-        // get initial mem
-        $mostMem = memory_get_usage();
-        
         // struct to assist report output
         $reportStruct = new class() {
-            public array $complaint;
+            public array $complaintPct;
             public array $yearBusinessTotal;
             public array $product;
             public array $business;
@@ -90,6 +90,11 @@ class ProcessComplaints
         $yearBusinessHashIsSet = function($v_year, $v_business) use ($reportStruct): bool {
             return isset($reportStruct->yearBusinessTotal[$v_year])
                 && isset($reportStruct->yearBusinessTotal[$v_year][$v_business]);
+        };
+        // calc highest pct filed
+        $calcPct = function(array $curYear): int {
+            // round((max($curYear) / count($curYear)) * 100)
+            return (int)(round((max($curYear) / count($curYear)) * 100));
         };
         
         /*******************************************
@@ -138,13 +143,15 @@ class ProcessComplaints
             
             $trackMem();
             $debug = 1;
+            
+        } // END OF main loop
         
-        } // end of main loop
-    
-        /*foreach($reportStruct->business as $key => $value) {
-            $businessByYear = explode('_', $key);
-            $reportStruct->yearBusinessTotal[$businessByYear[1]] []= $businessByYear[0];
-        }*/
+        // get the highest percentage filed against 1 company
+        foreach($reportStruct->yearBusinessTotal as $key => $value) {
+            $curYear = $reportStruct->yearBusinessTotal[$key];
+            $reportStruct->complaintPct[$key] = $calcPct($curYear);
+            $debug = 1;
+        }
         
         return $mostMem;
     }

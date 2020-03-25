@@ -29,6 +29,9 @@ class DataStream
                 $ml = __METHOD__ . ' line: ' . __LINE__;
                 throw new \Exception('_> insight-cc error: could not open csv ~' . $ml);
             }
+            
+            fclose($handle);
+            
         } catch(\Throwable $err) {
             exit($err->getMessage());
         }

@@ -22,10 +22,10 @@ $complaintProcessor = new ProcessComplaints($pathToCsv);
 // start stopwatch
 $startTime = microtime(true);
 // invoke the PHP program and track mem
-$m = number_format($complaintProcessor->compute());
+$mem = number_format($complaintProcessor->compute());
 // end stopwatch
 $endTime = number_format($startTime - microtime(true));
 
 // output to the CLI runtime and mem used
 echo "\nTotal time to run program = $endTime\n";
-echo "\nMost memory used = $m\n";
+echo "\nMost memory used = $mem\n";
