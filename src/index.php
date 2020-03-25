@@ -15,9 +15,10 @@ use dataphp\ProcessComplaints;
 require 'classes/DataStream.php';
 require 'classes/ProcessComplaints.php';
 
-$pathToCsv = '../input/s_complaints.csv';
+$pathToCsvInput = '../input/s_complaints.csv';
+$pathToCsvOutput  = '../output/test_report.csv';
 
-$complaintProcessor = new ProcessComplaints($pathToCsv);
+$complaintProcessor = new ProcessComplaints($pathToCsvInput, $pathToCsvOutput);
 
 // start stopwatch
 $startTime = microtime(true);

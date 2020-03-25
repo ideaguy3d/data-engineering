@@ -25,12 +25,14 @@ class ProcessComplaints
     private array $report;
     
     /**
-     * The path to the complains csv
+     * The path to the complaints csv
      * @var string
      */
     private string $pathToCsv;
     
-    public function __construct(string $pathToCsv) {
+    private $streamTo;
+    
+    public function __construct(string $pathToCsv, string $pathToCsvOutput) {
         // keeping var names short & sweet
         $this->reportFields = new class() {
             public string $pro = 'product';
@@ -41,6 +43,13 @@ class ProcessComplaints
         };
         $this->report [] = array_values((array)$this->reportFields);
         $this->pathToCsv = $pathToCsv;
+        $this->streamTo = fopen($pathToCsvOutput, 'w');
+    }
+    
+    public function __destruct() {
+        if(isset($this->streamTo)) {
+            fclose($this->streamTo);
+        }
     }
     
     /**
@@ -97,9 +106,10 @@ class ProcessComplaints
             return (int)(round((max($curYear) / count($curYear)) * 100));
         };
         
-        /*******************************************
-         ************** THE MAIN LOOP *************
-         ******************************************/
+        /************************************************
+         ************** THE MAIN LOOP O(n) *************
+         ***********************************************/
+        // where n is the number of records in the primary data set
         foreach(DataStream::genStream($this->pathToCsv) as $k => $row) {
             // skip header row
             if(0 === $k) continue;
@@ -146,11 +156,25 @@ class ProcessComplaints
             
         } // END OF main loop
         
-        // get the highest percentage filed against 1 company
+        // 2nd outer loop where n2 is how many years there are
+        // therefore time complexity increases to O(n * n2)
+        //-- get the highest percentage filed against 1 company
         foreach($reportStruct->yearBusinessTotal as $key => $value) {
             $curYear = $reportStruct->yearBusinessTotal[$key];
             $reportStruct->complaintPct[$key] = $calcPct($curYear);
             $debug = 1;
+        }
+        
+        // 3rd outer loop where n3 is the number of aggregated year & products
+        // (e.g. GROUP BY [year], [product]) e.g. O(n*n2*n3)
+        //-- attempt to construct the entire report array with this loop
+        foreach($reportStruct->product as $hash => $value) {
+            // product year
+            $py = explode('_', $hash);
+            // results
+            $r = [$py[0], $py[1]];
+            
+            $this->report [] = $r;
         }
         
         return $mostMem;

@@ -36,4 +36,16 @@ class DataStream
             exit($err->getMessage());
         }
     }
+    
+    /**
+     * to maintain separation between raw data & OOP computing
+     * I did all this work... 🤔
+     * ... I hope PHP doesn't ding my codes time complexity because of this
+     *
+     * @param $stream
+     * @param array $data
+     */
+    public static function writeToDisk($stream, array $data) {
+        fputcsv($stream, $data);
+    }
 }
