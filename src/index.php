@@ -7,8 +7,6 @@ declare(strict_types=1);
  * Time: 8:46 PM
  *
  * Insight coding challenge built with PHP 7.4
- *
- * branch qb
  */
 
 use dataphp\ProcessComplaints;
@@ -17,11 +15,11 @@ use dataphp\ProcessComplaints;
 require 'classes/DataStream.php';
 require 'classes/ProcessComplaints.php';
 
-$pathToCsv = '../input/complaints.csv';
+$pathToCsv = '../input/s_complaints.csv';
 
 $complaintProcessor = new ProcessComplaints($pathToCsv);
 
-// let's see how much memory and time is required just to scan the data with no app logic
+// track memory & time
 $startTime = microtime(true);
 $m = number_format($complaintProcessor->compute());
 $endTime = number_format($startTime - microtime(true));

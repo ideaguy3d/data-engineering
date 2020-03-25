@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace dataphp;
 
-
 class ProcessComplaints
 {
     /**
@@ -18,6 +17,12 @@ class ProcessComplaints
      * @var object
      */
     private object $reportFields;
+    
+    /**
+     * The result of the program
+     * @var array
+     */
+    private array $report;
     
     /**
      * The path to the complains csv
@@ -34,24 +39,48 @@ class ProcessComplaints
             public string $biz = 'total_company_complaints';
             public string $pct = 'company_highest_percent';
         };
+        $this->report [] = array_values((array)$this->reportFields);
         $this->pathToCsv = $pathToCsv;
     }
     
+    /**
+     * Will compute for each [product] and [year] that complaints were received,
+     * - the total number of complaints,
+     * - number of companies receiving a complaint
+     * - and the highest percentage of complaints directed at a single company.
+     *
+     * @return int
+     */
     public function compute(): int {
+        // HARD CODED index's just to get a solution built out real quick
+        $_company = 7;
+        $_date = 0;
+        $_product = 1;
+        
         $mostMem = memory_get_usage();
-        /*******************************************
-         ************** THE MAIN LOOP *************
-         ******************************************/
-        foreach(DataStream::genStream($this->pathToCsv) as $k => $row) {
-            // print every 10 recs
+        // track mem usage & print every 1,000 recs
+        $trackMemLambda = function() use (&$mostMem, &$k, &$row): void {
+            $tempRow = $row;
+            unset($row);
             if($k % 1000 === 0) {
                 $mem = memory_get_usage();
                 if($mem > $mostMem) {
                     $mostMem = $mem;
                 }
-                $row = print_r($row, true);
+                $row = print_r($tempRow, true);
                 echo "\n$mem | $k: $row\n";
             }
+        };
+        
+        /*******************************************
+         ************** THE MAIN LOOP *************
+         ******************************************/
+        foreach(DataStream::genStream($this->pathToCsv) as $k => $row) {
+            // skip header row
+            if(0 === $k) continue;
+            
+            $trackMemLambda();
+            $debug = 1;
         }
         return $mostMem;
     }

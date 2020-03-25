@@ -7,9 +7,7 @@ declare(strict_types=1);
  * Time: 9:01 PM
  */
 
-
 namespace dataphp;
-
 
 class DataStream
 {
