@@ -16,7 +16,7 @@ require 'classes/DataStream.php';
 require 'classes/ProcessComplaints.php';
 
 // the path to the CSV files
-$pathToCsvInput = '../input/complaints.csv';
+$pathToCsvInput = '../input/s_complaints.csv';
 $pathToCsvOutput  = '../output/test_report.csv';
 
 $complaintProcessor = new ProcessComplaints($pathToCsvInput, $pathToCsvOutput);
