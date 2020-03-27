@@ -103,14 +103,17 @@ class ProcessComplaints
             }
         };
         //TODO: create an exception handler and be sure to unit test this app logic
-        $yearBusinessHashIsSet = function($v_year, $v_business) use ($reportStruct): bool {
-            return isset($reportStruct->yearBusinessTotal[$v_year])
-                && isset($reportStruct->yearBusinessTotal[$v_year][$v_business]);
+        $yearBusinessHashIsSet = function(string $v_year, string $v_product, string $v_business) use ($reportStruct): bool {
+            return isset($reportStruct->yearBusinessTotal[$v_year][$v_product])
+                && isset($reportStruct->yearBusinessTotal[$v_year][$v_product][$v_business]);
         };
         // calc highest pct filed
-        $calcPct = function(array $curYear): int {
-            // round((max($curYear) / count($curYear)) * 100)
-            return (int)(round((max($curYear) / count($curYear)) * 100));
+        $calcPct = function(array $curYearCompanies, $year): array {
+            $r = [];
+            foreach($curYearCompanies as $productKey => $companies) {
+                $r[$productKey] = (int)(round((max($companies) / array_sum($companies)) * 100));
+            }
+            return $r;
         };
         
         /************************************************
@@ -148,13 +151,13 @@ class ProcessComplaints
             }
             
             // track total number of companies that received complaints BY product & year
-            if($yearBusinessHashIsSet($v_year, $v_business)) {
-                $reportStruct->yearBusinessTotal[$v_year][$v_business]++;
+            if($yearBusinessHashIsSet($v_year, $v_product, $v_business)) {
+                $reportStruct->yearBusinessTotal[$v_year][$v_product][$v_business]++;
                 $debug = 1;
             }
             else {
                 //TODO: create an exception handler and be sure to unit test this app logic
-                $reportStruct->yearBusinessTotal[$v_year][$v_business] = 1;
+                $reportStruct->yearBusinessTotal[$v_year][$v_product][$v_business] = 1;
                 $debug = 1;
             }
             
@@ -164,16 +167,16 @@ class ProcessComplaints
         } // END OF main loop
         
         // 2nd outer loop where n2 is how many years there are
-        // therefore time complexity increases to O(n * n2)
+        // therefore time complexity increases to O(n+n2)
         //-- get the highest percentage filed against 1 company
         foreach($reportStruct->yearBusinessTotal as $key => $value) {
             $curYear = $reportStruct->yearBusinessTotal[$key];
-            $reportStruct->complaintPct[$key] = $calcPct($curYear);
+            $reportStruct->complaintPct[$key] = $calcPct($curYear, $key);
             $debug = 1;
         }
         
         // 3rd outer loop where n3 is the number of aggregated year & products
-        // (e.g. GROUP BY [year], [product]) e.g. O(n*n2*n3)
+        // (e.g. GROUP BY [year], [product]) e.g. O(n+n2+n3)
         //-- attempt to construct the entire report array with this loop
         foreach($reportStruct->product as $hash => $value) {
             // product year
@@ -206,7 +209,9 @@ class ProcessComplaints
             */
             
             //TODO: FIX THIS, the last field is wrong, it's an easy fix that I'll work on tonight
-            $companyHighestPct = $reportStruct->complaintPct[(int)$r['year']];
+            $companyHighestPct = $reportStruct->complaintPct[(int)$r['year']][$r['product']];
+            
+            //TODO: sort by date
             
             // just test the rest of the logic
             $r [] = $totalCompanyComplaints;
