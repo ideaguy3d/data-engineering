@@ -25,6 +25,11 @@ took 2mins40secs
 used 5,540kb or less or memory (e.g. 5.4MB)
 
 
+//-- RUN 4 (final run) - 1.5 million 929mb data set
+Total time to run program = -163 e.g. 2mins 43secs
+Most memory used = 7,592,440 i.e. 7.5MB
+
+
 
 
 

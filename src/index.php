@@ -17,7 +17,7 @@ require 'classes/ProcessComplaints.php';
 
 // the path to the CSV files
 $pathToCsvInput = '../input/complaints.csv';
-$pathToCsvOutput  = '../output/test_report.csv';
+$pathToCsvOutput  = '../output/report.csv';
 
 $complaintProcessor = new ProcessComplaints($pathToCsvInput, $pathToCsvOutput);
 

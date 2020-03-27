@@ -1,0 +1,99 @@
+product,year,product_total_complaints,total_company_complaints,company_highest_percent
+"Credit reporting, credit repair services, or other personal consumer reports",2020,35465,9,30
+"Debt collection",2019,46403,9,4
+"Credit reporting, credit repair services, or other personal consumer reports",2019,138595,9,29
+"Vehicle loan or lease",2019,5489,9,12
+"Credit card or prepaid card",2019,25835,9,15
+"Money transfer, virtual currency, or money service",2019,5087,9,26
+Mortgage,2019,22708,9,9
+"Debt collection",2020,9318,9,4
+"Checking or savings account",2020,4157,9,16
+"Student loan",2019,7212,9,41
+Mortgage,2018,24576,9,12
+"Checking or savings account",2019,21740,9,15
+"Credit reporting, credit repair services, or other personal consumer reports",2018,111627,9,26
+"Credit reporting, credit repair services, or other personal consumer reports",2017,73393,18,35
+"Vehicle loan or lease",2018,5892,9,12
+"Payday loan, title loan, or personal loan",2019,4323,9,4
+"Debt collection",2016,40467,12,4
+"Debt collection",2017,47954,18,4
+"Credit card or prepaid card",2020,5500,9,17
+"Credit card",2017,7133,18,18
+"Debt collection",2018,51185,9,5
+Mortgage,2020,4283,9,8
+"Checking or savings account",2018,21211,9,16
+"Debt collection",2015,39724,12,5
+"Vehicle loan or lease",2020,1073,9,11
+"Student loan",2020,1180,9,33
+"Bank account or service",2015,17140,12,17
+"Credit card or prepaid card",2018,24249,9,15
+"Money transfer, virtual currency, or money service",2018,5433,9,30
+"Consumer Loan",2015,7886,12,9
+"Student loan",2018,8776,9,46
+"Consumer Loan",2016,9601,12,7
+"Payday loan, title loan, or personal loan",2018,4368,9,5
+Mortgage,2017,30577,18,12
+"Vehicle loan or lease",2017,3694,18,13
+"Checking or savings account",2017,12763,18,17
+"Credit card",2016,21065,12,21
+"Money transfer, virtual currency, or money service",2020,944,9,20
+"Money transfer, virtual currency, or money service",2017,3266,18,32
+"Credit card or prepaid card",2017,15404,18,15
+Mortgage,2016,41465,12,14
+"Payday loan",2016,1565,12,17
+Mortgage,2015,42345,12,12
+"Consumer Loan",2017,3557,18,8
+"Bank account or service",2016,21848,12,15
+"Payday loan, title loan, or personal loan",2020,781,9,5
+"Credit reporting",2016,44081,12,36
+Mortgage,2012,38109,6,31
+"Student loan",2017,17173,18,63
+"Payday loan",2017,493,18,12
+"Payday loan, title loan, or personal loan",2017,2958,18,6
+"Debt collection",2014,39139,12,6
+"Bank account or service",2012,12212,6,19
+"Credit reporting",2012,1873,6,38
+"Student loan",2016,8087,12,34
+"Payday loan",2015,1585,12,8
+Mortgage,2013,49400,9,25
+"Credit card",2015,17300,12,17
+"Bank account or service",2013,13388,9,18
+"Bank account or service",2017,6956,18,16
+"Other financial service",2016,465,12,5
+"Other financial service",2014,116,12,12
+"Money transfers",2016,1567,12,25
+"Payday loan",2014,1706,12,17
+"Credit reporting",2017,16587,18,30
+"Student loan",2013,3005,9,46
+"Consumer Loan",2013,3117,9,12
+Mortgage,2014,42961,12,14
+"Student loan",2014,4283,12,44
+"Prepaid card",2015,1784,12,42
+"Credit reporting",2014,29239,12,35
+"Credit card",2012,15353,6,20
+"Prepaid card",2017,449,18,19
+"Other financial service",2017,166,18,7
+"Prepaid card",2014,336,12,22
+"Money transfers",2014,1169,12,32
+"Credit reporting",2015,34272,12,35
+"Student loan",2015,4501,12,37
+"Bank account or service",2014,14662,12,17
+"Money transfers",2017,440,18,27
+"Credit reporting",2013,14380,9,36
+"Debt collection",2013,11069,9,9
+"Consumer Loan",2014,5457,12,8
+"Prepaid card",2016,1250,12,21
+"Money transfers",2015,1619,12,32
+"Credit card",2014,13974,12,17
+"Credit card",2013,13105,9,19
+"Other financial service",2015,312,12,10
+"Consumer Loan",2012,1986,6,19
+"Credit card",2011,1260,2,19
+"Student loan",2012,2840,6,42
+"Money transfers",2013,559,9,30
+Mortgage,2011,1276,2,33
+"Virtual currency",2016,7,12,57
+"Payday loan",2013,194,9,13
+"Virtual currency",2014,1,12,100
+"Virtual currency",2017,3,18,100
+"Virtual currency",2015,7,12,100
