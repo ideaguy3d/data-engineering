@@ -86,6 +86,7 @@ except psycopg2.Error as e:
     print("Error: select *")
     print (e)
 
+
 row = cur.fetchone()
 while row:
    print(row)
